@@ -1,0 +1,25 @@
+resources:
+  pipelines:
+    pipeline_policy_pipeline:
+      name: policy_pipeline
+      libraries:
+        - glob:
+            include: /Users/john.armstrong@databricks.com/repos/plob/plob/src/policy_pipeline/reference/**
+        - glob:
+            include: /Users/john.armstrong@databricks.com/repos/plob/plob/src/policy_pipeline/views/**
+        - glob:
+            include: /Users/john.armstrong@databricks.com/repos/plob/plob/src/policy_pipeline/bronze/**
+      schema: policy
+      continuous: false
+      development: false
+      channel: CURRENT
+      catalog: prod_lakehouse
+      serverless: true
+      root_path: /Users/john.armstrong@databricks.com/repos/plob/plob/src/policy_pipeline
+      event_log:
+        catalog: prod_lakehouse
+        schema: ${resources.schemas.policy.name}
+        name: pipeline_event_log
+      configuration:
+        source_schema: ${resources.schemas.policy.name}
+      

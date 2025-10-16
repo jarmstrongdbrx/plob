@@ -16,7 +16,9 @@ targets:
 
   # The 'prod' target, used for production deployment.
   prod:
-    mode: production
+    presets:
+      tags:
+        pipeline: policy
     workspace:
       host: https://dbc-0e0b539f-0c6d.cloud.databricks.com
       # We always use /Users/john.armstrong@databricks.com for all resources to make sure we only have a single copy.

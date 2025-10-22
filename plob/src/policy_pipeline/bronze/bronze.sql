@@ -2,7 +2,7 @@ CREATE OR REFRESH STREAMING TABLE bronze_policy
 (
   CONSTRAINT safe_schema EXPECT (_rescued_data IS NULL)
 )
-AS SELECT * FROM 
+AS SELECT *, _metadata as file_metadata FROM 
 cloud_files(
   '/Volumes/prod_lakehouse/${source_schema}/raw_landing_zone/policy/raw/',
   'json',

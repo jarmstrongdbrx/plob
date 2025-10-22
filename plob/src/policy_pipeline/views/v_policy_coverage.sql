@@ -6,7 +6,7 @@ CREATE OR REPLACE VIEW v_policy_coverage AS (
     SELECT
       bp.Policy.`Policy.Policy`.PolicyKey AS PolicyKey,
       Coverage AS coverage
-    FROM prod_lakehouse.policy.bronze_policy bp
+    FROM bronze_policy bp
     LATERAL VIEW explode(bp.Policy.`Policy.Coverage`) cov AS Coverage
     WHERE substr(trim(bp.Policy.`Policy.Policy`.PolicyKey), 1, 1) = 'P'
   )
@@ -39,6 +39,6 @@ CREATE OR REPLACE VIEW v_policy_coverage AS (
     CC.COVERAGE_CODE_NAME,
     CC.COVERAGE_CODE_DESC
   FROM exploded_coverage
-  JOIN prod_lakehouse.dev_john_armstrong_policy.v_policy_coverage_code CC
+  JOIN v_policy_coverage_code CC
     ON upper(exploded_coverage.coverage.CoverageCodeKey) = upper(CC.COVERAGE_CODE_KEY)
 );

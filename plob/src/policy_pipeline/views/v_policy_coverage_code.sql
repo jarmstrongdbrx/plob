@@ -4,6 +4,6 @@ CREATE OR REPLACE VIEW v_policy_coverage_code AS (
     TRIM(COALESCE(cov.CoverageCode, '')) AS COVERAGE_CODE,
     TRIM(COALESCE(cov.CoverageCodeName, '')) AS COVERAGE_CODE_NAME,
     TRIM(COALESCE(cov.CoverageCodeDesc, '')) AS COVERAGE_CODE_DESC
-  FROM prod_lakehouse.dev_john_armstrong_policy.bronze_policy bp
+  FROM bronze_policy bp
   LATERAL VIEW EXPLODE(bp.Policy.`Policy.CoverageCode`) AS cov
 );
